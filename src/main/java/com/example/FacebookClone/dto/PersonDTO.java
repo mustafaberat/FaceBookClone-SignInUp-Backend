@@ -15,7 +15,6 @@ public class PersonDTO {
     private String password;
     private String passwordConfirm;
 
-    @Builder
     public PersonDTO(Long id, String name, String surname, String email, String password, String passwordConfirm) {
         this.id = id;
         this.name = name;
