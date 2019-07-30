@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity //Allow to write on Database
 @Getter //Auto get function
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 @ToString
 @NoArgsConstructor //Auto empty constructor
 @AllArgsConstructor //Auto full parameter constructor
+@Table(name = "People")
 public class Person {
     @Id
     @GeneratedValue

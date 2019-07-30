@@ -19,15 +19,17 @@ public class PersonService {
     public void addPerson(Person newPerson){
         this.personRepository.save(newPerson);
     }
-//
+
+    @OrderBy()
+    public List<Person> getPeople(){
+        return personRepository.findAll(Sort.by("id"));
+    }
+
+
 //    public void deleteById(Long id){
 //        this.personRepository.deleteById(id);
 //    }
 //
-//    @OrderBy()
-//    public List<Person> getPeople(){
-//        return personRepository.findAll(Sort.by("id"));
-//    }
 //
 //    public Person getPersonById(Long id){
 //        return personRepository.findById(id).get();

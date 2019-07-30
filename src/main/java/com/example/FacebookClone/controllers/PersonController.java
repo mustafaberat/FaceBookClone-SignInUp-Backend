@@ -23,11 +23,11 @@ public class PersonController {
         personService.addPerson(person);
     }
 
-//    @GetMapping("/people")
-//    public List<Person> getPeople(){
-//        return personService.getPeople();
-//    }
-//
+    @GetMapping("/people")
+    public List<Person> getPeople(){
+        return personService.getPeople();
+    }
+
 //    @GetMapping("/people/{id}")
 //    public Person getPersonById(Long id){
 //        return personService.getPersonById(id);
