@@ -1,6 +1,7 @@
 package com.example.FacebookClone.services;
 
 import com.example.FacebookClone.model.Person;
+import com.example.FacebookClone.model.SignInPerson;
 import com.example.FacebookClone.repository.PersonRepository;
 import javassist.bytecode.ByteArray;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +20,10 @@ public class PersonService {
     @Autowired
     private final PersonRepository personRepository;
 
-    private MessageDigest messageDigest ;
 
-    private String getHash(String password){
+    public static String getHash(String password){
         try {
+            MessageDigest messageDigest ;
             StringBuffer hexString = new StringBuffer(); //String yaratiyor
             messageDigest = MessageDigest.getInstance("SHA-256"); //Hash fonksiyonu
             byte[] byteArray = messageDigest.digest(password.getBytes());
@@ -51,8 +52,12 @@ public class PersonService {
         this.personRepository.deleteById(id);
     }
 
-//
-//    public Person getPersonById(Long id){
-//        return personRepository.findById(id).get();
-//    }
+
+    public Person getPersonByEmail(String email){
+        List<Person> peopleList = personRepository.findByEmail(email);
+        if (peopleList == null || peopleList.isEmpty()){
+            return null;
+        }
+        else return peopleList.get(0);
+    }
 }

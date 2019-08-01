@@ -2,6 +2,7 @@ package com.example.FacebookClone.controllers;
 
 
 import com.example.FacebookClone.model.Person;
+import com.example.FacebookClone.model.SignInPerson;
 import com.example.FacebookClone.services.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -23,20 +24,36 @@ public class PersonController {
         personService.addPerson(person);
     }
 
+    @PostMapping("/signIn")
+    public String checkPersonToLogIn(@RequestBody SignInPerson signInPerson){
+        LOG.info(signInPerson.toString());
+        if(getPersonByEmail(signInPerson) != null){ //Email found
+            Person logInPerson = getPersonByEmail(signInPerson);
+            if(logInPerson.getPassword().equals(PersonService.getHash(signInPerson.getPassword()
+                    + signInPerson.getEmail()))){
+                return "Correct";
+            } else {
+                return "FailPassword";
+            }
+        }
+        else { //Email not found
+            return "FailEmail";
+        }
+    }
+
     @GetMapping("/people")
     public List<Person> getPeople(){
         return personService.getPeople();
     }
 
-    @DeleteMapping("/people/{id}")
-    public void deleteById(@PathVariable Long id){
+    @DeleteMapping("/people/id")
+    public void deleteById(@RequestBody Long id){
         personService.deleteById(id);
     }
 
-//    @GetMapping("/people/{id}")
-//    public Person getPersonById(Long id){
-//        return personService.getPersonById(id);
-//    }
-//
+    private Person getPersonByEmail(@RequestBody SignInPerson signInPerson){
+        return personService.getPersonByEmail(signInPerson.getEmail());
+    }
+
 
 }

@@ -3,11 +3,9 @@ package com.example.FacebookClone.model;
 
 import com.sun.istack.internal.NotNull;
 import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity //Allow to write on Database
 @Getter //Auto get function
@@ -25,6 +23,7 @@ public class Person {
     @NotNull
     private String surname;
     @NotNull
+    @Column(unique = true)
     private String email;
     @NotNull
     private String password;
