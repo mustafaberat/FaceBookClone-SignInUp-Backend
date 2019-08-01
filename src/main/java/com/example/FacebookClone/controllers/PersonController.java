@@ -28,13 +28,15 @@ public class PersonController {
         return personService.getPeople();
     }
 
+    @DeleteMapping("/people/{id}")
+    public void deleteById(@PathVariable Long id){
+        personService.deleteById(id);
+    }
+
 //    @GetMapping("/people/{id}")
 //    public Person getPersonById(Long id){
 //        return personService.getPersonById(id);
 //    }
 //
-//    @DeleteMapping("/people/{id}")
-//    public void deleteById(@PathVariable Long id){
-//        personService.deleteById(id);
-//    }
+
 }
