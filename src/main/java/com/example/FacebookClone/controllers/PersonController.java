@@ -24,6 +24,13 @@ public class PersonController {
         personService.addPerson(person);
     }
 
+    @PostMapping("/signUpMultiPeople")
+    public void addMultiPeople(@RequestBody List<Person> personList){
+        for(Person newPerson:personList){
+            personService.addPerson(newPerson);
+        }
+    }
+
     @PostMapping("/signIn")
     public String checkPersonToLogIn(@RequestBody SignInPerson signInPerson){
         LOG.info(signInPerson.toString());
@@ -46,9 +53,14 @@ public class PersonController {
         return personService.getPeople();
     }
 
-    @DeleteMapping("/people/id")
-    public void deleteById(@RequestBody Long id){
+    @DeleteMapping("/people/{id}")
+    public void deleteById(@PathVariable Long id){
         personService.deleteById(id);
+    }
+
+    @DeleteMapping("/people/deleteAllData")
+    public void deleteById(){
+        personService.deleteMyAllData();
     }
 
     private Person getPersonByEmail(@RequestBody SignInPerson signInPerson){

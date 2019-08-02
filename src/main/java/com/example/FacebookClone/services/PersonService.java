@@ -52,6 +52,10 @@ public class PersonService {
         this.personRepository.deleteById(id);
     }
 
+    public void deleteMyAllData(){
+        this.personRepository.deleteAll();
+    }
+
 
     public Person getPersonByEmail(String email){
         List<Person> peopleList = personRepository.findByEmail(email);
